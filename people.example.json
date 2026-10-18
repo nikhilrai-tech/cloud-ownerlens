@@ -1,0 +1,4 @@
+{
+  "alice": {"slack": "U0123ABCD", "email": "alice@example.com"},
+  "bob": {"slack": "bob@example.com", "email": "bob@example.com"}
+}
