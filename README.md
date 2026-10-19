@@ -1,6 +1,35 @@
-# ownerlens
+# cloud-ownerlens
 
-Finds cloud resources nobody owns. For each suspicious resource it answers:
+[![tests](https://github.com/nikhilrai-tech/cloud-ownerlens/actions/workflows/ci.yml/badge.svg)](https://github.com/nikhilrai-tech/cloud-ownerlens/actions/workflows/ci.yml)
+[![license: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](pyproject.toml)
+[![read-only](https://img.shields.io/badge/cloud%20access-read--only-brightgreen.svg)](#it-cannot-change-your-infrastructure)
+
+**Find unused cloud resources nobody owns, work out who they belong to, and ask before anyone touches them.**
+
+![ownerlens scan on a demo account](docs/terminal-demo.png)
+
+*Demo on a fake account. The production-tagged volume is capped at `ask-owner`: it never gets a cleanup proposal.*
+
+## Why
+
+Every cloud account collects stopped VMs, unattached disks, idle NAT gateways and snapshots of volumes that no longer exist.
+Cost tools tell you they are expensive. They don't tell you **who owns them**, what that person **answered**, or whether
+a **backup exists**. And owners rarely say "delete it": they say "we might need it later". ownerlens handles that part.
+
+## Try it
+
+```bash
+git clone https://github.com/nikhilrai-tech/cloud-ownerlens && cd cloud-ownerlens
+python3 -m venv .venv && .venv/bin/pip install -e .
+.venv/bin/ownerlens scan --regions us-east-1 --explain      # uses your normal AWS credentials, read-only
+```
+
+Needs only read permissions (policy below). GCP and Azure are experimental.
+
+## What it answers
+
+For each suspicious resource:
 
 1. **Is it unused?** (zombie score from CloudWatch + resource state)
 2. **Who owns it?** (tags, people named in Name tags, CloudTrail creator, combined into a confidence score)
@@ -15,7 +44,7 @@ Finds cloud resources nobody owns. For each suspicious resource it answers:
   Kubernetes cluster, are capped at `ask-owner`.
 - Reports are files on disk. Owner messages are drafts; nothing is sent anywhere.
 
-## Quick start
+## Commands
 
 ```bash
 python3 -m venv .venv && .venv/bin/pip install -e '.[dev]'
