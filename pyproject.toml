@@ -9,7 +9,7 @@ description = "Find cloud resources nobody owns: infer the owner, score how unus
 requires-python = ">=3.10"
 license = "MIT"
 license-files = ["LICENSE"]
-authors = [{ name = "nikhilrai-tech", email = "nikhilrai662@gmail.com" }]
+authors = [{ name = "nikhilrai-tech" }]
 readme = "README.md"
 dependencies = ["boto3>=1.34"]
 
