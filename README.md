@@ -9,7 +9,6 @@
 
 ![ownerlens scan on a demo account](docs/terminal-demo.png)
 
-*Demo on a fake account. The production-tagged volume is capped at `ask-owner`: it never gets a cleanup proposal.*
 
 ## Why
 
